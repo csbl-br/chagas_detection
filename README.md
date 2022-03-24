@@ -12,15 +12,15 @@ To refer to this particular tool or image dataset in a publication, please cite:
 
 Describe the code functionanlity here...
 
-![Figure](./figures/fig1.png)
+![Figure](figures/fig1.png)
 
 ## Installation
 
 The simplest way to install this tool is to clone this repository and create an Anaconda (or mini-conda) environment with the [required](./requirements.txt) libraries. An Anaconda install guide is available [here](https://docs.anaconda.com/anaconda/install/). To clone this repository open a terminal window and type:
 
-'''
+```
 	git clone https://github.com/csbl-br/chagas_detection.git
-'''
+```
 
 ## Usage
 
