@@ -1,0 +1,8 @@
+python==3.9
+pandas
+matplotlib
+numpy
+scipy
+thefuzz
+scikit-image
+scikit-learn
