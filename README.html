@@ -1,0 +1,61 @@
+<h1 id="introduction">Introduction</h1>
+<p>Chagas detection is a tool for the detection of <em>T. cruzi</em> trypomastigote forms in blood smear images. In particular, it provides a machine learning based method for the detection of parasites in images acquired using a mobile phone camera. This repository contains the codes for <em>T. cruzi</em> detection. The images for training and testing the model are available at <a href="https://doi.org/10.5281/zenodo.5123062">Zenodo</a>.</p>
+<p><a href="https://doi.org/10.5281/zenodo.5123062"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5123062.svg" alt="DOI" /></a> <img src="https://img.shields.io/badge/python-v3.8-blue.svg" alt="Python" /> <img src="https://img.shields.io/badge/contributions-welcome-orange.svg" alt="Contributions welcome" /> <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/license-GPL3.0-blue.svg" alt="License" /></a></p>
+<!---
+To refer to this particular tool or image dataset in a publication, please cite:
+
+> **ADD CITATION HERE!.**
+--->
+<h2 id="functionality">Functionality</h2>
+<figure>
+<img src="figures/fig1.png" alt="T. cruzi detection image analysis pipeline." /><figcaption aria-hidden="true"><em>T. cruzi</em> detection image analysis pipeline.</figcaption>
+</figure>
+<p>This repo contains the following functionality:</p>
+<ol type="1">
+<li><code>my_tools.py</code> contains auxiliary, and image data processing functions.</li>
+<li><code>process_image.py</code> runs the image processing, feature extraction and classification on a single image.</li>
+<li><code>process_all_images.py</code> runs the image processing and feature extraction on all images.</li>
+<li><code>features_classification.py</code> trains and assess model performance based one extracted features.</li>
+<li><code>images_info.csv</code> contains image metadata
+<ul>
+<li><em>filename</em>: the image file name.</li>
+<li><em>width</em>: image width in pixels.</li>
+<li><em>height</em>: image height in pixels.</li>
+<li><em>n_structures</em>: number of labeled parasite structures.</li>
+<li><em>resize_factor</em>: scale factor to reduce image.</li>
+<li><em>set</em>: image used for model training or testing.</li>
+</ul></li>
+<li><code>positions_data.csv</code> contains the position of each parasite object (nucleus or kinetoplast) in the respective image.
+<ul>
+<li><em>filename</em>: the image file name.</li>
+<li><em>x, y</em>: the structure position (x, y) in the image.</li>
+<li><em>structure</em>: the name of the annotated structure.</li>
+<li><em>set</em>: image used for model training or testing.</li>
+<li><em>new_x, new_y</em>: the structure position (x, y) in the image after resizing.</li>
+</ul></li>
+<li><code>features_data.csv</code> contains the extracted feature values from each image.
+<ul>
+<li><em>filename</em>: the image file name.</li>
+<li><em>parasite_ID</em>: the number of the parasite in the image.</li>
+<li><em>label</em>: the parasite segment number</li>
+<li><em>centroid_x, centroid_y</em>: the position (x, y) of the parasite in given 100 x 100 pixel<sup>2</sup> area.</li>
+<li><em>area : curvature_energy</em>: geometric, color texture and invariant moment features of the parasites.</li>
+<li><em>structure</em>: presence (<code>True</code>) or absence (<code>False</code>) of the parasite in the segmented region.</li>
+</ul></li>
+<li><code>images/</code> and <code>models/</code> folders contains the sample test image and the trained models, respectively.</li>
+<li><code>object_selection_knn.py</code> Script to select samples for the training/test dataset</li>
+</ol>
+<p><strong>NOTE:</strong> This tool is a command-line Python script, without graphical user interface (GUI) at the moment. Since these analysis steps are often performed in different datasets, all the provided functions should be fast to implement and automate. It is not intended for diagnosis, but for research purpose only.</p>
+<h2 id="installation">Installation</h2>
+<p>The simplest way to install this tool is to clone this repository and create an Anaconda (or mini-conda) environment with the <a href="./requirements.txt">required</a> libraries. An Anaconda install guide is available <a href="https://docs.anaconda.com/anaconda/install/">here</a>. To clone this repository open a terminal window and type:</p>
+<pre><code>git clone https://github.com/csbl-br/chagas_detection.git</code></pre>
+<h2 id="usage">Usage</h2>
+<figure>
+<img src="figures/fig2.png" alt="Example of detection T. cruzi in low-resolution image." /><figcaption aria-hidden="true">Example of detection <em>T. cruzi</em> in low-resolution image.</figcaption>
+</figure>
+<p>Save the image at <code>./images/</code> folder and run <code>process_image.py</code> to analyze single file.</p>
+<pre><code>$ python3 process_image.py</code></pre>
+<p>Run <code>process_all_images.py</code> to extract features from all images, followed by <code>feature_classification.py</code> to train a model.</p>
+<hr />
+<h3 id="license">License</h3>
+<p>These codes are free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation (GNU General Public License v3.0). It is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY and LIABILITY; without even the implied warranty of fitness for a particular purpose, including diagnostic. See the <a href="./LICENSE">GNU General Public License</a> for more details.</p>
