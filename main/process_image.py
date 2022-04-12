@@ -34,7 +34,7 @@ if not os.path.exists(out_path):
 
 #%%
 # Process single image
-file = img_files[0]
+file = img_files[2]
 img = imread(os.path.join(img_path, file))
 model = load_model("./models/rnd_clf.pickle")
 
@@ -82,11 +82,13 @@ plt.figure(figsize=(8,8))
 plt.imshow(img)
 
 for x,y in zip(centroid_x, centroid_y):
-    circle = plt.Circle((x, y), 50, ec="green", lw=2, fill=False)
+    circle = plt.Circle((x, y), 50, edgecolor="#0072b2", lw=2, fill=False)
+    plt.text(x, y, "P", color="#0072b2", fontsize=10,
+        verticalalignment='center', horizontalalignment='center')
     plt.gca().add_patch(circle)
 
 plt.title(file)
 plt.axis(False)
-# plt.scatter(centroid_x, centroid_y, c='red')
+# plt.scatter(centroid_x, centroid_y, c='#0072b2')
 plt.show()
-# plt.savefig("../../temp.png")
+# plt.savefig(os.path.join(out_path, "temp.png"))
